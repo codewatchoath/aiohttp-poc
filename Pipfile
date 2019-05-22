@@ -9,7 +9,6 @@ requests = "*"
 aiohttp = "*"
 ipython = "*"
 black = "*"
-pre-commit = "*"
 
 [dev-packages]
 pylint = "*"
