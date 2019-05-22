@@ -8,9 +8,14 @@ name = "pypi"
 requests = "*"
 aiohttp = "*"
 ipython = "*"
+black = "*"
+pre-commit = "*"
 
 [dev-packages]
 pylint = "*"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true

@@ -3,11 +3,12 @@ import configparser
 from aiohttp import web, ClientSession
 
 CONFIG = configparser.ConfigParser()
-CONFIG.read('config.ini')
+CONFIG.read("config.ini")
 
 
 async def receive_status(request):
     return web.Response(text=f"Success from {sys.argv[1]}")
+
 
 async def hello(request):
     for section in CONFIG.sections():
@@ -17,17 +18,23 @@ async def hello(request):
                 print(await resp.text())
     return web.Response(text="Hello, world")
 
+
 def main():
     server_name = sys.argv[1]
     if server_name not in CONFIG:
         raise Exception(f"{server_name} is not on config.ini")
-    
+
     app = web.Application()
-    app.add_routes([web.get('/', hello)])
-    app.add_routes([web.get('/status', receive_status)])
-    web.run_app(
-        app, port=CONFIG[server_name]["port"], host=CONFIG[server_name]["ip"]
-    )
+    app.add_routes([web.get("/", hello)])
+    app.add_routes([web.get("/status", receive_status)])
+    web.run_app(app, port=CONFIG[server_name]["port"], host=CONFIG[server_name]["ip"])
+
+
+def qt_main():
+    app = QApplication(sys.argv)
+    ex = App()
+    sys.exit(app.exec_())
+
 
 if __name__ == "__main__":
     main()
