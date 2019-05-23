@@ -1,8 +1,7 @@
-import sys
 import configparser
-from aiohttp import web, ClientSession
-from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtGui import QIcon
+import sys
+
+from aiohttp import ClientSession, web
 
 CONFIG = configparser.ConfigParser()
 CONFIG.read("config.ini")
@@ -32,27 +31,5 @@ def main():
     web.run_app(app, port=CONFIG[server_name]["port"], host=CONFIG[server_name]["ip"])
 
 
-class App(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.title = "PyQt5 simple window - pythonspot.com"
-        self.left = 10
-        self.top = 10
-        self.width = 640
-        self.height = 480
-        self.initUI()
-
-    def initUI(self):
-        self.setWindowTitle(self.title)
-        self.setGeometry(self.left, self.top, self.width, self.height)
-        self.show()
-
-
-def qt_main():
-    app = QApplication(sys.argv)
-    ex = App()
-    sys.exit(app.exec_())
-
-
 if __name__ == "__main__":
-    qt_main()
+    main()
